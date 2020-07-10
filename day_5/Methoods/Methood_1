@@ -1,0 +1,63 @@
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Test {
+    public static void YsC() {
+        System.out.println("Are they with the same wast digits");
+
+    }
+
+    public static int SecDegree(int number) {
+        return number * number;
+
+    }
+
+    public static Arrays Check_Same_Last_Number_Arr(int number[], int number2[]) {
+        System.out.println(Arrays.toString(number));
+        System.out.println(Arrays.toString(number2));
+        if (number.length - 1 == number2.length - 1) {
+            System.out.println("Same");
+        } else {
+            System.out.println("Not same");
+        }
+
+        return null;
+    }
+
+    public static void Check_Same_Last_Digits(int a, int b) {
+        if (a % 10 == b % 10) {
+            System.out.println("Same Last Digits");
+        } else {
+            System.out.println("Not the same last digits");
+        }
+    }
+
+    public static void Check_Same_Last_Digits_on_Second_Degree(int a, int b) {
+        int c = a * a;
+        int d = b * b;
+        if (c % 10 == d % 10) {
+            System.out.println("Same last digits after multiplying by themselves");
+        } else {
+            System.out.println("Not same last digits after multiplying by themselves");
+        }
+
+    }
+
+
+    public static void main(String[] args) {
+        YsC();
+        Scanner scanner = new Scanner(System.in);
+        int arr1[] = {5, 6, 4, 32, 64};
+        int arr2[] = {5, 6, 43, 54, 64};
+        int number1 = scanner.nextInt();
+        int number2 = scanner.nextInt();
+        Check_Same_Last_Digits(number1, number2);
+        System.out.println();
+        Check_Same_Last_Number_Arr(arr1, arr2);
+        System.out.println();
+        System.out.println("Will they be the same after multiplying by themselves");
+        int number3 = scanner.nextInt();
+        int number4 = scanner.nextInt();
+        Check_Same_Last_Digits_on_Second_Degree(number3, number4);
+    }
+}
