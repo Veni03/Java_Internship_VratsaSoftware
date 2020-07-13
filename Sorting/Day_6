@@ -109,8 +109,6 @@ public class Sorting {
                     System.out.println("There is no sort on this number!");
         }
 
-
-
     }
 }
 
