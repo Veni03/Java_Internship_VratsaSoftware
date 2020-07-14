@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Sorting {
-    public  static void showMenu() {
+    public static void showMenu() {
         System.out.println("+-------------------------------------------+");
         System.out.println("|                 Hello,                    |");
         System.out.println("|        Choose sorting type                |");
@@ -13,23 +13,10 @@ public class Sorting {
         System.out.println("Type 1 for Bubble sort");
         System.out.println("Type 2 for Insertion sort");
         System.out.println("Type 3 for Selection sort");
+        System.out.println("Type 4 for Quick Sort");
         System.out.println();
     }
-    public static boolean Continue_Action(String userChoice ){
-        boolean continueAction=false;
 
-        if(userChoice.equals("Y") ){
-            continueAction = true;
-            System.out.println(continueAction);
-
-        }else if(userChoice.equals("N")){
-            continueAction = false;
-            System.out.println(continueAction);
-        }else{
-            System.out.println("Wrong command, try again");
-        }
-        return continueAction;
-    }
     public static void Bubble_Sort(int array[], int temp) {
         temp = 0;
         System.out.println("Bubble sort: ");
@@ -40,8 +27,8 @@ public class Sorting {
                     temp = array[j - 1];
                     array[j - 1] = array[j];
                     array[j] = temp;
-                    System.out.println(Arrays.toString(array));
                 }
+                System.out.println(Arrays.toString(array));
             }
         }
         System.out.println("Sorted array: " + Arrays.toString(array));
@@ -78,36 +65,121 @@ public class Sorting {
                 temp = array[minIndex];
                 array[minIndex] = array[j];
                 array[j] = temp;
-                System.out.println(Arrays.toString(array));
+
             }
+            System.out.println(Arrays.toString(array));
         }
         System.out.println("Sorted array: " + Arrays.toString(array));
     }
 
+    static int partition(int arr[], int low, int high) {
+        int pivot = arr[high];
+        int i = (low - 1);
+        for (int j = low; j < high; j++) {
+
+            if (arr[j] < pivot) {
+                i++;
+
+
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+
+
+        int temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+
+        return i + 1;
+    }
+
+
+    static void sort(int arr[], int low, int high) {
+        if (low < high) {
+
+            int pi = partition(arr, low, high);
+
+            sort(arr, low, pi - 1);
+            sort(arr, pi + 1, high);
+
+        }
+
+        System.out.println(Arrays.toString(arr));
+    }
+
+
+    static void printArray(int arr[]) {
+        int n = arr.length;
+        for (int i = 0; i < n; ++i)
+            System.out.print(arr[i] + " ");
+        System.out.println();
+    }
+
+    public static boolean Continue_Action(String userChoice) {
+        boolean continueAction = false;
+
+        if (userChoice.equals("Y")) {
+            continueAction = true;
+
+
+        } else if (userChoice.equals("N")) {
+            continueAction = false;
+
+        } else {
+            System.out.println("Wrong command, try again");
+        }
+        return continueAction;
+    }
+
+
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        String userAction;
+        String userAction = null;
         int a[] = {5, 6, 4, 3, 2, 1};
         int temp = 0;
+        int n = a.length;
+        boolean continueProcess = true;
+
         showMenu();
 
-        int userInput = in.nextInt();
-        switch(userInput){
-            case 1:
-                Bubble_Sort(a,temp);
-                System.out.println("Do you want to continue: Y/N");
-                userAction = in.next();
-                Continue_Action(userAction);
-                break;
-            case 2:
-                Insertion_Sort(a);
-                break;
-            case 3:
-                Seletion_Sort(a);
-                break;
+
+        do {
+            int userInput = in.nextInt();
+            switch (userInput) {
+                case 1:
+                    Bubble_Sort(a, temp);
+                    System.out.println("Do you want to continue: Y/N");
+                    userAction = in.next();
+                    continueProcess = Continue_Action(userAction);
+                    break;
+
+                case 2:
+                    Insertion_Sort(a);
+                    System.out.println("Do you want to continue: Y/N");
+                    userAction = in.next();
+                    continueProcess = Continue_Action(userAction);
+
+                    break;
+                case 3:
+                    Seletion_Sort(a);
+                    System.out.println("Do you want to continue: Y/N");
+                    userAction = in.next();
+                    continueProcess = Continue_Action(userAction);
+
+                    break;
+                case 4:
+                    sort(a, 0, n - 1);
+                    System.out.println("Do you want to continue: Y/N");
+                    userAction = in.next();
+                    continueProcess = Continue_Action(userAction);
+                    break;
+
                 default:
                     System.out.println("There is no sort on this number!");
-        }
+            }
+        } while (continueProcess != false);
 
     }
 }
